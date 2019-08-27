@@ -2,9 +2,26 @@
 
 const express = require('express');
 const router = express.Router();
+const auth = require('../auth/middleware');
 
-router.get('/books', handleGetAll);
-router.get('/books/:id', handleGetOne);
+/**
+ * This is a route to get books
+ * @route GET /books
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ * @returns {object} 200 -  count and book results
+ */
+router.get('/books', auth, handleGetAll);
+/**
+ * This is a route to get one book
+ * @route GET /books/:id
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ * @returns {object} 200 -  book title
+ */
+router.get('/books/:id', auth, handleGetOne);
 
 // Route Handlers
 function handleGetAll(req, res, next) {
